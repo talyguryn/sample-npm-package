@@ -6,8 +6,7 @@ on:
     types: [published]
 
 jobs:
-  build:
-
+  publish:
     # Run on latest version of ubuntu
     runs-on: ubuntu-latest
 
@@ -17,6 +16,7 @@ jobs:
           # "ref" specifies the branch to check out.
           # "github.event.release.target_commitish" is a global variable and specifies the branch the release targeted
           ref: ${{ github.event.release.target_commitish }}
+
       # install Node.js
       - name: Use Node.js 15
         uses: actions/setup-node@v1
@@ -29,17 +29,45 @@ jobs:
       - run: git config --global user.name "GitHub CD bot"
       - run: git config --global user.email "github-cd-bot@example.com"
 
-      # upgrade npm version in package.json to the tag used in the release.
-      - run: yarn version --new-version ${{ github.event.release.tag_name }}
+      # If you have published prerelease version
+      - if: ${{ github.event.release.prerelease }}
+        name: Is prerelease version tagged 'next'
+        run:
+          # upgrade npm version in package.json to the tag used in the release.
+          - run: yarn version --new-version ${{ github.event.release.tag_name }} --prerelease --preid rc
 
-      # publish to NPM -> there is one caveat, continue reading for the fix
-      - run: yarn publish --access=public
-        env:
-          # Use a token to publish to NPM. See below for how to set it up
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # publish to NPM -> there is one caveat, continue reading for the fix
+          - run: yarn publish --access=public --tag=next
+            env:
+              # Use a token to publish to NPM. See below for how to set it up
+              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # If you have published prerelease version
+      - if: !${{ github.event.release.prerelease }}
+        name: Is release version tagged 'latest'
+        run:
+          # upgrade npm version in package.json to the tag used in the release.
+          - run: yarn version --new-version ${{ github.event.release.tag_name }}
+
+          # publish to NPM -> there is one caveat, continue reading for the fix
+          - run: yarn publish --access=public
+            env:
+              # Use a token to publish to NPM. See below for how to set it up
+              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # push the version changes to GitHub
       - run: git push
         env:
           # The secret is passed automatically. Nothing to configure.
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  notify:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ::set-env name=EMOJI_PACKAGE::$'\xf0\x9f\x93\xa6'
+      - run: echo ::set-env name=PACKAGE_NAME::$(node -p "require('./package.json').name")
+      - run: echo ::set-env name=PACKAGE_VERSION::$(node -p "require('./package.json').version")
+      - run: echo ::set-env name=MESSAGE::"$EMOJI_PACKAGE [$PACKAGE_NAME](https://npmjs.com/package/$PACKAGE_NAME) $PACKAGE_VERSION was published"
+      - run: curl -X POST ${{ secrets.CODEX_BOT_CHAT }} -d "message=$MESSAGE" -d "parse_mode=Markdown" -d "disable_web_page_preview=true"
