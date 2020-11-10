@@ -34,10 +34,10 @@ jobs:
         name: Is prerelease version tagged 'next'
         run:
           # upgrade npm version in package.json to the tag used in the release.
-          - run: yarn version --new-version ${{ github.event.release.tag_name }} --prerelease --preid rc
+          yarn version --new-version ${{ github.event.release.tag_name }} --prerelease --preid rc
 
           # publish to NPM -> there is one caveat, continue reading for the fix
-          - run: yarn publish --access=public --tag=next
+          yarn publish --access=public --tag=next
             env:
               # Use a token to publish to NPM. See below for how to set it up
               NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -47,10 +47,10 @@ jobs:
         name: Is release version tagged 'latest'
         run:
           # upgrade npm version in package.json to the tag used in the release.
-          - run: yarn version --new-version ${{ github.event.release.tag_name }}
+          yarn version --new-version ${{ github.event.release.tag_name }}
 
           # publish to NPM -> there is one caveat, continue reading for the fix
-          - run: yarn publish --access=public
+          yarn publish --access=public
             env:
               # Use a token to publish to NPM. See below for how to set it up
               NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
