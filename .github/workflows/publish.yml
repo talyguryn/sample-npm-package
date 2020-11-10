@@ -24,9 +24,6 @@ jobs:
           node-version: 15
           # Specifies the registry, this field is required!
           registry-url: https://registry.npmjs.org/
-        env:
-          # Use a token to publish to NPM. See below for how to set it up
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # set up git since we will later push to the repo
       - run: git config --global user.name "GitHub CD bot"
@@ -40,6 +37,9 @@ jobs:
 
           # publish to NPM -> there is one caveat, continue reading for the fix
           yarn publish --access=public --tag=next
+        env:
+          # Use a token to publish to NPM. See below for how to set it up
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # If you have published prerelease version
       - if: "!github.event.release.prerelease"
@@ -49,6 +49,9 @@ jobs:
 
           # publish to NPM -> there is one caveat, continue reading for the fix
           yarn publish --access=public
+        env:
+          # Use a token to publish to NPM. See below for how to set it up
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # push the version changes to GitHub
       - run: git push
