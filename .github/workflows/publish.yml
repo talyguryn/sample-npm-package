@@ -34,6 +34,9 @@ jobs:
           # Specifies the registry, this field is required!
           registry-url: https://registry.npmjs.org/
 
+      - name: Prepare package
+        run: yarn
+
       - name: Release
         #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
         run: |
