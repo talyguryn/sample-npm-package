@@ -33,8 +33,7 @@ jobs:
       - run: git config --global user.email "github-cd-bot@example.com"
 
       # If you have published prerelease version
-      - name: Is prerelease version tagged 'next'
-        if: github.event.release.prereleasee
+      - if: "github.event.release.prerelease"
         run: |
           # upgrade npm version in package.json to the tag used in the release.
           yarn version --new-version ${{ github.event.release.tag_name }} --prerelease --preid rc
@@ -43,8 +42,7 @@ jobs:
           yarn publish --access=public --tag=next
 
       # If you have published prerelease version
-      - name: Is release version tagged 'latest'
-        if: !github.event.release.prerelease
+      - if: "!github.event.release.prerelease"
         run: |
           # upgrade npm version in package.json to the tag used in the release.
           yarn version --new-version ${{ github.event.release.tag_name }}
