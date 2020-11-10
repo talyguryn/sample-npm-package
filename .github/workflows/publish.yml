@@ -44,7 +44,7 @@ jobs:
 #        name: If you have published prerelease version
 #        # publish to NPM -> there is one caveat, continue reading for the fix
       - run: echo ${{ github.event.release.prerelease }}
-      - run: yarn publish --access=public $TAG
+      - run: yarn publish --access=public ${{ TAG }}
         env:
           # Use a token to publish to NPM. See below for how to set it up
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
