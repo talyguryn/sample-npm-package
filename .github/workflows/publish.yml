@@ -1,9 +1,17 @@
 name: NPM publish CD workflow
 
 on:
-  release:
-    # This specifies that the build will be triggered when we publish a release
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      distTag:
+        description: 'Dist tag to publish'
+        required: true
+        default: 'latest'
+
+#on:
+#  release:
+#    # This specifies that the build will be triggered when we publish a release
+#    types: [published]
 
 jobs:
   publish:
