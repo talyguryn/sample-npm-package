@@ -44,7 +44,7 @@ jobs:
 #        name: If you have published prerelease version
 #        # publish to NPM -> there is one caveat, continue reading for the fix
       - run: echo ${{ github.event.release.prerelease }}
-      - run: echo ::set-env name=TAG::"[[ ${{ github.event.release.prerelease }} -e true ]] && '--tag=next'
+      - run: echo ::set-env name=TAG::"[[ ${{ github.event.release.prerelease }} -e true ]] && '--tag=next'"
       - run: echo $TAG
       - run: yarn publish --access=public $TAG
         env:
