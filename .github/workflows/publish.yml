@@ -37,11 +37,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Release
-          if: ${{github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next'}}
-          run: |
-            git config --global user.name "GitHub CD bot"
-            git config --global user.email "github-cd-bot@example.com"
-            yarn release && yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+        if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
+        run: |
+          git config --global user.name "GitHub CD bot"
+          git config --global user.email "github-cd-bot@example.com"
+          yarn release && yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
 
 #      # set up git since we will later push to the repo
 #      - run: git config --global user.name "GitHub CD bot"
