@@ -49,7 +49,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # push the version changes to GitHub
-      - run: git push
+      - run: git push && git push --tags
         env:
           # The secret is passed automatically. Nothing to configure.
           github-token: ${{ secrets.GITHUB_TOKEN }}
