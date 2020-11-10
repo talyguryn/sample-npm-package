@@ -30,7 +30,7 @@ jobs:
       - run: git config --global user.email "github-cd-bot@example.com"
 
       # If you have published prerelease version
-      - if: ${{ github.event.release.prerelease }}
+      - if: github.event.release.prerelease
         name: Is prerelease version tagged 'next'
         run:
           # upgrade npm version in package.json to the tag used in the release.
@@ -43,7 +43,7 @@ jobs:
               NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # If you have published prerelease version
-      - if: !${{ github.event.release.prerelease }}
+      - if: !github.event.release.prerelease
         name: Is release version tagged 'latest'
         run:
           # upgrade npm version in package.json to the tag used in the release.
