@@ -45,7 +45,7 @@ jobs:
           yarn release
 #          yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #      # set up git since we will later push to the repo
