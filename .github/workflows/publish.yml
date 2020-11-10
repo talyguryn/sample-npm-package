@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "github-cd-bot@example.com"
 
       - name: Prepare package
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Release
         #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
