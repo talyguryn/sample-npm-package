@@ -1,23 +1,18 @@
 name: NPM publish CD workflow
 
 on:
-#  workflow_dispatch:
-#    inputs:
-#      distTag:
-#        description: 'Dist tag to publish'
-#        required: true
-#        default: 'latest'
-  release:
-    # This specifies that the build will be triggered when we publish a release
-    types: [published]
+  push:
+    branches:
+      - 'next'
+
+#  release:
+#    # This specifies that the build will be triggered when we publish a release
+#    types: [published]
 
 jobs:
   publish:
     # Run on latest version of ubuntu
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -34,15 +29,22 @@ jobs:
           # Specifies the registry, this field is required!
           registry-url: https://registry.npmjs.org/
 
+      # set up git since we will later push to the repo
+      - name: Prepare git settings
+        run: |
+          git config --global user.name "GitHub CD bot"
+          git config --global user.email "github-cd-bot@example.com"
+
       - name: Prepare package
         run: yarn
 
       - name: Release
         #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
         run: |
-          git config --global user.name "GitHub CD bot"
-          git config --global user.email "github-cd-bot@example.com"
-          yarn release && yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+          yarn release
+          yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 #      # set up git since we will later push to the repo
 #      - run: git config --global user.name "GitHub CD bot"
