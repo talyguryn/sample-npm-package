@@ -45,7 +45,7 @@ jobs:
         #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
         run: |
           yarn release
-          yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+#          yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
