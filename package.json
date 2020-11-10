@@ -3,6 +3,11 @@
   "version": "0.0.14",
   "description": "Sample NPM package for test purposes",
   "main": "index.js",
-  "scripts": {},
-  "license": "MIT"
+  "scripts": {
+    "release": "semantic-release"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "semantic-release": "^17.2.2"
+  }
 }

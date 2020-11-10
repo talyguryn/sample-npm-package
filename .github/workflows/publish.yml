@@ -9,6 +9,9 @@ jobs:
   publish:
     # Run on latest version of ubuntu
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -25,34 +28,31 @@ jobs:
           # Specifies the registry, this field is required!
           registry-url: https://registry.npmjs.org/
 
-      # set up git since we will later push to the repo
-      - run: git config --global user.name "GitHub CD bot"
-      - run: git config --global user.email "github-cd-bot@example.com"
+      - name: Release
+          if: ${{github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next'}}
+          run: |
+            git config --global user.name "GitHub CD bot"
+            git config --global user.email "github-cd-bot@example.com"
+            yarn release && yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
 
-      # upgrade npm version in package.json according to release tag
-      - run: yarn version --new-version ${{ github.event.release.tag_name }}
-
-#      - if: "github.event.release.prerelease"
-#        name: If you have published prerelease version
-#        # publish to NPM -> there is one caveat, continue reading for the fix
-#        run: yarn publish --access=public --tag=next
+#      # set up git since we will later push to the repo
+#      - run: git config --global user.name "GitHub CD bot"
+#      - run: git config --global user.email "github-cd-bot@example.com"
+#
+#      # upgrade npm version in package.json according to release tag
+#      - run: yarn version --new-version ${{ github.event.release.tag_name }}
+#
+#      # publish to NPM
+#      - run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
 #        env:
 #          # Use a token to publish to NPM. See below for how to set it up
 #          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-#      - if: "!github.event.release.prerelease"
-#        name: If you have published prerelease version
-#        # publish to NPM -> there is one caveat, continue reading for the fix
-      - run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
-        env:
-          # Use a token to publish to NPM. See below for how to set it up
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # push the version changes to GitHub
-      - run: git push && git push --tags
-        env:
-          # The secret is passed automatically. Nothing to configure.
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      # push the version changes to GitHub
+#      - run: git push && git push --tags
+#        env:
+#          # The secret is passed automatically. Nothing to configure.
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   notify:
     needs: publish
