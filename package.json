@@ -2,6 +2,7 @@
   "name": "@talyguryn/sample-npm-package",
   "version": "v0.0.7",
   "description": "Sample NPM package for test purposes",
+  "main": "index.js",
   "scripts": {},
   "license": "MIT"
 }
