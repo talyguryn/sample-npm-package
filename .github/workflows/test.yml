@@ -3,7 +3,7 @@ name: Test action
 on: [push]
 
 jobs:
-  hello_world_job:
+  hello:
     runs-on: ubuntu-latest
     name: Send a notification
     steps:
@@ -14,16 +14,19 @@ jobs:
 #        id:
 #        uses:
 
-      - name: Hello world action step
-        id: codexbot-notify
-        uses: codex-team/action-codexbot-notify@v1
-        with:
-          webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '😚 click [here](${{ secrets.CODEX_BOT_CHAT }})'
-          parse_mode: 'markdown'
-          disable_web_page_preview: true
+      - name: Get package info
+        id: package
+        uses: talyguryn/sample-github-action@v3
 
       - name: Get the output
         run: |
-          echo "response-body: ${{ steps.hello.codexbot-notify.response-body }}"
-          echo "response-code: ${{ steps.hello.codexbot-notify.response-code }}"
+          echo "name: ${{ steps.hello.package.name }}"
+          echo "version: ${{ steps.hello.package.version }}"
+
+      - name: Send a message
+        uses: codex-team/action-codexbot-notify@v1
+        with:
+          webhook: ${{ secrets.CODEX_BOT_CHAT }}
+          message: '📦 ${{ steps.hello.package.name }} ${{ steps.hello.package.version }}'
+          parse_mode: 'markdown'
+          disable_web_page_preview: true
