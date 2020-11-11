@@ -19,7 +19,7 @@ jobs:
         uses: talyguryn/sample-github-action@v2.7
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: click [here](${{ secrets.CODEX_BOT_CHAT }})
+          message: '😚 click [here](${{ secrets.CODEX_BOT_CHAT }})'
           parse_mode: 'markdown'
           disable_web_page_preview: true
 
