@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: talyguryn/sample-github-action@v1
+        uses: talyguryn/sample-github-action@v1.1
         with:
           who-to-greet: 'Taly'
 
