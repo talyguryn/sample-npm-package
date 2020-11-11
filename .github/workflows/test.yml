@@ -9,11 +9,11 @@ jobs:
     steps:
       - name: Hello world action step
         id: codexbot-notify
-        uses: talyguryn/sample-github-action@v2.1
+        uses: talyguryn/sample-github-action@v2.2
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: 🏚 hello! ~OOO~
-          parse_mode: MarkdownV2
+          message: '🏚 hello! ~OOO~'
+          parse_mode: 'MarkdownV2'
 
       - name: Get the output
         run: |
