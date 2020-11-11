@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: codexbot-notify
-        uses: talyguryn/sample-github-action@v2.4
+        uses: talyguryn/sample-github-action@v2.5
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
           message: '📌 hello! ~O~'
