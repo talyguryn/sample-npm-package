@@ -20,13 +20,13 @@ jobs:
 
       - name: Get the output
         run: |
-          echo "name: ${{ steps.hello.package.name }}"
-          echo "version: ${{ steps.hello.package.version }}"
+          echo "name: ${{ steps.package.outputs.name }}"
+          echo "version: ${{ steps.package.outputs.version }}"
 
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '📦 ${{ steps.hello.package.name }} ${{ steps.hello.package.version }}'
+          message: '📦 ${{ steps.package.outputs.name }} ${{ steps.package.outputs.version }}'
           parse_mode: 'markdown'
           disable_web_page_preview: true
