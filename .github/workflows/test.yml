@@ -12,7 +12,7 @@ jobs:
         uses: talyguryn/sample-github-action@v2.3
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: 'hello! ~O~'
+          message: '📔 hello!'
           parse_mode: 'Markdown'
 
       - name: Get the output
