@@ -13,7 +13,7 @@ jobs:
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
           message: 'hello! ~O~'
-          parse_mode: 'MarkdownV2'
+          parse_mode: 'Markdown'
 
       - name: Get the output
         run: |
