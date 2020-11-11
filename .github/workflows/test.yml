@@ -14,6 +14,7 @@ jobs:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
           message: '📦 [@editorjs/editorjs](https://npmjs.com/package/@editorjs/editorjs) 2.19.0 was published'
           parse_mode: 'markdown'
+          disable_web_page_preview: true
 
       - name: Get the output
         run: |
