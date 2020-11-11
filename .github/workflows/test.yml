@@ -12,8 +12,8 @@ jobs:
         uses: talyguryn/sample-github-action@v2.3
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: 'hello!'
-          parse_mode: 'Markdown'
+          message: 'hello! ~O~'
+          parse_mode: 'MarkdownV2'
 
       - name: Get the output
         run: |
