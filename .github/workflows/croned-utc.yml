@@ -3,7 +3,7 @@ name: Tick
 
 on:
   schedule:
-    - cron: '55 7 * * *'
+    - cron: '0 8 * * *'
 
 jobs:
   hello:
