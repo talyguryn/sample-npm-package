@@ -2,7 +2,7 @@ name: Tick
 
 on:
   schedule:
-  - cron: '* * * * *'  # every minute
+    - cron: '*/5 * * * *'  # every minute
 
 jobs:
   hello:
