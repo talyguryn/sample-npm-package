@@ -1,8 +1,8 @@
-name: Tick 15
+name: Tick 12th min
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0,12,24,36,48 * * * *'
 
 jobs:
   hello:
@@ -16,6 +16,6 @@ jobs:
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '⏰ 15 min — ${{ steps.date.outputs.date }}'
+          message: '⏰ 12th min — ${{ steps.date.outputs.date }}'
           parse_mode: 'markdown'
           disable_web_page_preview: true
