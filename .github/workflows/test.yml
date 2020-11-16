@@ -27,6 +27,6 @@ jobs:
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '📦 ${{ steps.package.outputs.name }} ${{ steps.package.outputs.version }}'
+          message: '📦 [${{ steps.package.outputs.name }}](${{ steps.package.outputs.npmjs-link }}) ${{ steps.package.outputs.version }}'
           parse_mode: 'markdown'
           disable_web_page_preview: true
