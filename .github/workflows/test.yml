@@ -22,6 +22,7 @@ jobs:
         run: |
           echo "name: ${{ steps.package.outputs.name }}"
           echo "version: ${{ steps.package.outputs.version }}"
+          echo "npmjs-link: ${{ steps.package.outputs.npmjs-link }}"
 
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
