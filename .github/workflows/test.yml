@@ -16,7 +16,7 @@ jobs:
 
       - name: Get package info
         id: package
-        uses: talyguryn/sample-github-action@v3.1
+        uses: talyguryn/sample-github-action@v3.2
 
       - name: Get the output
         run: |
