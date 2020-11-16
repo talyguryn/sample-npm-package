@@ -1,0 +1,19 @@
+name: Tick
+  UTC
+
+on:
+  schedule:
+    - cron: '55 7 * * *'
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    name: Send a notification
+    steps:
+      - name: Send a message
+        uses: codex-team/action-codexbot-notify@v1
+        with:
+          webhook: ${{ secrets.CODEX_BOT_CHAT }}
+          message: '⏰ It is 7:55 UTC!'
+          parse_mode: 'markdown'
+          disable_web_page_preview: true
