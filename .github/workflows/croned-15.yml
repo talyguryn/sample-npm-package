@@ -1,0 +1,18 @@
+name: Tick 15
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    name: Send a notification
+    steps:
+      - name: Send a message
+        uses: codex-team/action-codexbot-notify@v1
+        with:
+          webhook: ${{ secrets.CODEX_BOT_CHAT }}
+          message: '⏰ 15 min'
+          parse_mode: 'markdown'
+          disable_web_page_preview: true

@@ -1,9 +1,9 @@
-name: Tick
+name: Tick 5
   UTC
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   hello:
@@ -14,6 +14,6 @@ jobs:
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '⏰ It is 7:55 UTC!'
+          message: '⏰ 5 min'
           parse_mode: 'markdown'
           disable_web_page_preview: true

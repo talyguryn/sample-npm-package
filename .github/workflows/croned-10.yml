@@ -1,8 +1,8 @@
-name: Tick Local
+name: Tick 10
 
 on:
   schedule:
-    - cron: '0 11 * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   hello:
@@ -13,6 +13,6 @@ jobs:
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '⏰ It is 11:00 UTC+3!'
+          message: '⏰ 10 min'
           parse_mode: 'markdown'
           disable_web_page_preview: true
