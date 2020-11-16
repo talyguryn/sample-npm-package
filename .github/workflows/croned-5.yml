@@ -1,5 +1,4 @@
 name: Tick 5
-  UTC
 
 on:
   schedule:
