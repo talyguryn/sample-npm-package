@@ -39,19 +39,15 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: ⚠️ ${{ matrix.domain }} — registry expiries in ${{ steps.check-domain.outputs.paid-till-days-left }} days
-          body: |
-            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
-            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
+          body: 'Till *${{ steps.check-domain.outputs.paid-till-date }}*'
 
       - name: Create an issue if SSL lifespan days number is below limit
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 10 }}
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 1000 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🧨 ${{ matrix.domain }} — SSL cert expires in ${{ steps.check-domain.outputs.ssl-expire-days-left }} days
-          body: |
-            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
-            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
+          body: 'Till *${{ steps.check-domain.outputs.ssl-expire-days-left }}*'
 
 #      - name: Create an issue (paid till)
 #        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 50 }}
