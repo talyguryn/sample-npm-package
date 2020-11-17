@@ -9,13 +9,13 @@ jobs:
     strategy:
       matrix:
         domain:
-#          - https://codex.so/
-#          - https://editorjs.io/
-#          - https://hawk.so/
+          - https://codex.so/
+          - https://editorjs.io/
+          - https://hawk.so/
           - https://capella.pics/
-#          - https://ifmo.su/
-#          - https://school332.ru/
-#          - https://school181.ru/
+          - https://ifmo.su/
+          - https://school332.ru/
+          - https://school181.ru/
           - https://stickerum.ru/
     steps:
       - uses: actions/checkout@v2
@@ -25,16 +25,29 @@ jobs:
         with:
           url: ${{ matrix.domain }}
 
-      - name: Create an issue
+      - name: Create an issue (paid till)
+        if: ${{ steps.check-domain.outputs.paid-till-days-left < 50 }}
         uses: rishabhgupta/git-action-issue@v2
         id: Issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: 🧨 Check domain ${{ matrix.domain }}
+          title: ⚠️ [Paid till] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.paid-till-days-left }} days left
           body: |
             Domain ${{ matrix.domain }}
-            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }}
-            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }}
+            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
+            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
+
+      - name: Create an issue
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left < 50 }}
+        uses: rishabhgupta/git-action-issue@v2
+        id: Issue
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 🧨 [SSL cert] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.ssl-expire-days-left }} days left
+          body: |
+            Domain ${{ matrix.domain }}
+            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
+            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
 
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
