@@ -8,17 +8,15 @@ jobs:
     name: Send a notification
     steps:
       - uses: actions/checkout@v2
+      - name: Check domain SSL and registry expire date
+        id: check-domain
+        uses: talyguryn/sample-github-action@v4
         with:
-          fetch-depth: 0
-
-      - name: Get package info
-        id: package
-        uses: codex-team/action-nodejs-package-info@v1
-
+          url: https://codex.so
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '📦 [${{ steps.package.outputs.name }}](${{ steps.package.outputs.npmjs-link }}) ${{ steps.package.outputs.version }} was published'
+          message: '🧨 SSL:${{ steps.check-domain.outputs.ssl-expire-days-left }} DNS:${{ steps.check-domain.outputs.paid-till-days-left }}'
           parse_mode: 'markdown'
           disable_web_page_preview: true
