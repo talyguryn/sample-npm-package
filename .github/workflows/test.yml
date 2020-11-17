@@ -55,8 +55,7 @@ jobs:
             SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
             DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
 
-      - run: echo ${{ steps.check-domain.outputs.ssl-expire-days-left }}
-      - run: echo ${{ steps.check-domain.outputs.paid-till-days-left }}
+      - run: echo 'SSL cert ${{ steps.check-domain.outputs.ssl-expire-days-left }} days left'
 
 #      - name: Send a message
 #        uses: codex-team/action-codexbot-notify@v1
