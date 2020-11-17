@@ -10,8 +10,14 @@ jobs:
       matrix:
         domain:
           - https://codex.so/
+          - https://docs.codex.so/
+          - https://media.codex.so/
+          - https://bot.codex.so/
+          - https://bot.ifmo.su/
           - https://editorjs.io/
           - https://hawk.so/
+          - https://beta.hawk.so/
+          - https://k1.hawk.so/
           - https://capella.pics/
           - https://ifmo.su/
           - https://school332.ru/
