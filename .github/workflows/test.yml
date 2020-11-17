@@ -28,7 +28,6 @@ jobs:
       - name: Create an issue (paid till)
         if: ${{ steps.check-domain.outputs.paid-till-days-left < 50 }}
         uses: rishabhgupta/git-action-issue@v2
-        id: Issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: ⚠️ [Paid till] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.paid-till-days-left }} days left
@@ -40,7 +39,6 @@ jobs:
       - name: Create an issue
         if: ${{ steps.check-domain.outputs.ssl-expire-days-left < 50 }}
         uses: rishabhgupta/git-action-issue@v2
-        id: Issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🧨 [SSL cert] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.ssl-expire-days-left }} days left
