@@ -24,6 +24,6 @@ jobs:
         uses: codex-team/action-codexbot-notify@v1
         with:
           webhook: ${{ secrets.CODEX_BOT_CHAT }}
-          message: '🧨 SSL:${{ steps.check-domain.outputs.ssl-expire-days-left }} DNS:${{ steps.check-domain.outputs.paid-till-days-left }}'
+          message: '🧨 Domain_${{ matrix.domain }} SSL_${{ steps.check-domain.outputs.ssl-expire-days-left }} DNS_${{ steps.check-domain.outputs.paid-till-days-left }}'
           parse_mode: 'markdown'
           disable_web_page_preview: true
