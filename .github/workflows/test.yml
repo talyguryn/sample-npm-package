@@ -9,13 +9,13 @@ jobs:
     strategy:
       matrix:
         domain:
-          - https://codex.so/
-          - https://editorjs.io/
-          - https://hawk.so/
+#          - https://codex.so/
+#          - https://editorjs.io/
+#          - https://hawk.so/
           - https://capella.pics/
-          - https://ifmo.su/
-          - https://school332.ru/
-          - https://school181.ru/
+#          - https://ifmo.su/
+#          - https://school332.ru/
+#          - https://school181.ru/
           - https://stickerum.ru/
     steps:
       - uses: actions/checkout@v2
@@ -24,6 +24,19 @@ jobs:
         uses: talyguryn/sample-github-action@v4
         with:
           url: ${{ matrix.domain }}
+
+      - name: Create an issue
+        uses: rishabhgupta/git-action-issue@v2
+        id: Issue
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Check domain ${{ matrix.domain }}
+          body:
+            message: |
+              🧨 Domain `${{ matrix.domain }}`
+              SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }}
+              DNS: ${{ steps.check-domain.outputs.paid-till-days-left }}
+
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
         with:
