@@ -9,21 +9,21 @@ jobs:
     strategy:
       matrix:
         domain:
-          - https://codex.so/
-          - https://telelelelelllee.ru/
-          - https://docs.codex.so/
-          - https://media.codex.so/
-          - https://bot.codex.so/
-          - https://bot.ifmo.su/
-          - https://editorjs.io/
-          - https://hawk.so/
-          - https://beta.hawk.so/
-          - https://k1.hawk.so/
-          - https://capella.pics/
-          - https://ifmo.su/
-          - https://school332.ru/
-          - https://school181.ru/
-          - https://stickerum.ru/
+          - https://codex.so
+          - https://telelelelelllee.ru
+          - https://docs.codex.so
+          - https://media.codex.so
+          - https://bot.codex.so
+          - https://bot.ifmo.su
+          - https://editorjs.io
+          - https://hawk.so
+          - https://beta.hawk.so
+          - https://k1.hawk.so
+          - https://capella.pics
+          - https://ifmo.su
+          - https://school332.ru
+          - https://school181.ru
+          - https://stickerum.ru
     steps:
       - uses: actions/checkout@v2
 
