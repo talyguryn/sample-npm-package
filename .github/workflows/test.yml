@@ -13,6 +13,10 @@ jobs:
           - https://editorjs.io/
           - https://hawk.so/
           - https://capella.pics/
+          - https://ifmo.su/
+          - https://school332.ru/
+          - https://school181.ru/
+          - https://stickerum.ru/
     steps:
       - uses: actions/checkout@v2
       - name: Check domain SSL and registry expire date
