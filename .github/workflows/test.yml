@@ -8,11 +8,11 @@ jobs:
     name: Check domain
     strategy:
       matrix:
-        domain: |
-          https://codex.so/
-          https://editorjs.io/
-          https://hawk.so/
-          https://capella.pics/
+        domain:
+          - https://codex.so/
+          - https://editorjs.io/
+          - https://hawk.so/
+          - https://capella.pics/
     steps:
       - uses: actions/checkout@v2
       - name: Check domain SSL and registry expire date
