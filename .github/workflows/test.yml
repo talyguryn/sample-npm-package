@@ -1,16 +1,29 @@
-name: Check domain
+name: Check domains
 
-on: [push]
+on: push
+#on:
+#  schedule:
+#    - cron:  '0 8 * * *'
 
 jobs:
   hello:
     runs-on: ubuntu-latest
-    name: Check domain
+    name: Check domains
     strategy:
       matrix:
         domain:
           - https://codex.so
+          - https://docs.codex.so
+          - https://media.codex.so
+          - https://bot.codex.so
           - https://editorjs.io
+          - https://hawk.so
+          - https://beta.hawk.so
+          - https://k1.hawk.so
+          - https://capella.pics
+          - https://ifmo.su
+          - https://school181.ru
+          - https://school332.ru
     steps:
       - name: Check domain SSL and registry expire date
         id: check-domain
@@ -19,98 +32,17 @@ jobs:
           url: ${{ matrix.domain }}
 
       - name: Create an issue if paid till number is below limit
-        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 1000 }}
+        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 100 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: ⚠️ ${{ matrix.domain }} — registry expiries in ${{ steps.check-domain.outputs.paid-till-days-left }} days
-          body: 'Till: `${{ steps.check-domain.outputs.paid-till-date }}`'
+          body: 'Paid till: `${{ steps.check-domain.outputs.paid-till-date }}`'
 
       - name: Create an issue if SSL lifespan days number is below limit
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 1000 }}
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 100 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🧨 ${{ matrix.domain }} — SSL cert expires in ${{ steps.check-domain.outputs.ssl-expire-days-left }} days
-          body: 'Till: `${{ steps.check-domain.outputs.ssl-expire-date }}`'
-
-#jobs:
-#  hello:
-#    runs-on: ubuntu-latest
-#    name: Check domain
-#    strategy:
-#      matrix:
-#        domain:
-#          - https://codex.so
-#          - https://telelelelelllee.ru
-#          - https://docs.codex.so
-#          - https://media.codex.so
-#          - https://bot.codex.so
-#          - https://bot.ifmo.su
-#          - https://editorjs.io
-#          - https://hawk.so
-#          - https://beta.hawk.so
-#          - https://k1.hawk.so
-#          - https://capella.pics
-#          - https://ifmo.su
-#          - https://school332.ru
-#          - https://school181.ru
-#          - https://stickerum.ru
-#    steps:
-#      - uses: actions/checkout@v2
-#
-#      - name: Check domain SSL and registry expire date
-#        id: check-domain
-#        uses: talyguryn/sample-github-action@v4.6
-#        with:
-#          url: ${{ matrix.domain }}
-#
-#      - name: Create an issue if paid till number is below limit
-#        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 200 }}
-#        uses: rishabhgupta/git-action-issue@v2
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          title: ⚠️ ${{ matrix.domain }} — registry expiries in ${{ steps.check-domain.outputs.paid-till-days-left }} days
-#          body: 'Till `${{ steps.check-domain.outputs.paid-till-date }}`'
-#
-#      - name: Create an issue if SSL lifespan days number is below limit
-#        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 2000 }}
-#        uses: rishabhgupta/git-action-issue@v2
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          title: 🧨 ${{ matrix.domain }} — SSL cert expires in ${{ steps.check-domain.outputs.ssl-expire-days-left }} days
-#          body: 'Till `${{ steps.check-domain.outputs.ssl-expire-date }}`'
-
-#      - name: Create an issue (paid till)
-#        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 50 }}
-#        uses: rishabhgupta/git-action-issue@v2
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          title: ⚠️ [Paid till] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.paid-till-days-left }} days left
-#          body: |
-#            Domain ${{ matrix.domain }}
-#            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
-#            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
-#
-#      - name: Create an issue
-#        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 50 }}
-#        uses: rishabhgupta/git-action-issue@v2
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          title: 🧨 [SSL cert] ${{ matrix.domain }} — ${{ steps.check-domain.outputs.ssl-expire-days-left }} days left
-#          body: |
-#            Domain ${{ matrix.domain }}
-#            SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} till ${{ steps.check-domain.outputs.ssl-expire-date }}
-#            DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
-#
-#      - run: echo 'SSL cert ${{ steps.check-domain.outputs.ssl-expire-days-left }} days left'
-
-#      - name: Send a message
-#        uses: codex-team/action-codexbot-notify@v1
-#        with:
-#          webhook: ${{ secrets.CODEX_BOT_CHAT }}
-#          message: '💣 Domain `${{ matrix.domain }}`
-#                    SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }}
-#                    DNS: ${{ steps.check-domain.outputs.paid-till-days-left }}'
-#          parse_mode: 'markdown'
-#          disable_web_page_preview: true
+          body: 'Valid till: `${{ steps.check-domain.outputs.ssl-expire-date }}`'
