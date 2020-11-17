@@ -10,6 +10,7 @@ jobs:
       matrix:
         domain:
           - https://codex.so/
+          - https://telelelelelllee.ru/
           - https://docs.codex.so/
           - https://media.codex.so/
           - https://bot.codex.so/
@@ -25,9 +26,10 @@ jobs:
           - https://stickerum.ru/
     steps:
       - uses: actions/checkout@v2
+
       - name: Check domain SSL and registry expire date
         id: check-domain
-        uses: talyguryn/sample-github-action@v4
+        uses: talyguryn/sample-github-action@v4.1
         with:
           url: ${{ matrix.domain }}
 
