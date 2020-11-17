@@ -30,11 +30,9 @@ jobs:
         id: Issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: Check domain ${{ matrix.domain }}
+          title: 🧨 Check domain ${{ matrix.domain }}
           body:
-            message: '💣 Domain `${{ matrix.domain }}`
-                      SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }}
-                      DNS: ${{ steps.check-domain.outputs.paid-till-days-left }}'
+            message: '💣 Domain ${{ matrix.domain }} / SSL: ${{ steps.check-domain.outputs.ssl-expire-days-left }} / DNS: ${{ steps.check-domain.outputs.paid-till-days-left }}'
 
       - name: Send a message
         uses: codex-team/action-codexbot-notify@v1
