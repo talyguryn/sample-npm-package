@@ -34,7 +34,7 @@ jobs:
           url: ${{ matrix.domain }}
 
       - name: Create an issue if paid till number is below limit
-        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 100 }}
+        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 1000 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +44,7 @@ jobs:
             DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
 
       - name: Create an issue if SSL lifespan days number is below limit
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 100 }}
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 10 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
