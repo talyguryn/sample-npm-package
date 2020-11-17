@@ -29,12 +29,12 @@ jobs:
 
       - name: Check domain SSL and registry expire date
         id: check-domain
-        uses: talyguryn/sample-github-action@v4.3
+        uses: talyguryn/sample-github-action@v4.4
         with:
           url: ${{ matrix.domain }}
 
       - name: Create an issue (paid till)
-        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 30 }}
+        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 50 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -45,7 +45,7 @@ jobs:
             DNS: ${{ steps.check-domain.outputs.paid-till-days-left }} till ${{ steps.check-domain.outputs.paid-till-date }}
 
       - name: Create an issue
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 30 }}
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 50 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
