@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/talyguryn/sample-npm-package/compare/v0.1.0...v0.1.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* update ([3ba3899](https://github.com/talyguryn/sample-npm-package/commit/3ba38999547c4d2d30a6a0a854e2d51e9d7ebf6f))
+
 # [0.1.0](https://github.com/talyguryn/sample-npm-package/compare/v0.0.23...v0.1.0) (2020-11-18)
 
 
