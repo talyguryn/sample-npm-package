@@ -1,9 +1,9 @@
-name: Check domains
+name: Check domains SSL and DNS
 
-#on: push
-on:
-  schedule:
-    - cron:  '0 20 * * *'
+on: push
+#on:
+#  schedule:
+#    - cron:  '0 8 * * *'
 
 jobs:
   hello:
@@ -12,16 +12,45 @@ jobs:
     strategy:
       matrix:
         domain:
+          # CodeX site
           - https://codex.so
-          - https://docs.codex.so
-          - https://media.codex.so
-          - https://bot.codex.so
-          - https://editorjs.io
-          - https://hawk.so
-          - https://beta.hawk.so
-          - https://k1.hawk.so
-          - https://capella.pics
           - https://ifmo.su
+
+          # Editor.js
+          - https://editorjs.io
+
+          # Private docs
+          - https://docs.codex.so
+
+          # CodeX Bot structure
+          - https://bot.codex.so
+          #   Github app
+          - https://github.bot.codex.so
+          - https://github.bot.ifmo.su
+          #   Notify app
+          - https://notify.bot.codex.so
+          - https://notify.bot.ifmo.su
+
+          # CodeX Tunnel
+          - https://tun.codex.so
+          - https://tun.ifmo.su
+
+          # Hawk
+          - https://hawk.so
+          #   Hawk 2 beta
+          - https://beta.hawk.so
+          - https://api.beta.hawk.so
+          - https://k1.hawk.so
+          #   Hawk 2 stage
+          - https://stage.hawk.so
+          - https://api.stage.hawk.so
+          - https://k1.stage.hawk.so
+
+          # Capella
+          - https://capella.pics
+
+          # CodeX Media sites
+          - https://media.codex.so
           - https://school181.ru
           - https://school332.ru
     steps:
@@ -32,7 +61,7 @@ jobs:
           url: ${{ matrix.domain }}
 
       - name: Create an issue if paid till number is below limit
-        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 200 }}
+        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 10 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +69,7 @@ jobs:
           body: 'Paid till: `${{ steps.check-domain.outputs.paid-till-date }}`'
 
       - name: Create an issue if SSL lifespan days number is below limit
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 40 }}
+        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 10 }}
         uses: rishabhgupta/git-action-issue@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
