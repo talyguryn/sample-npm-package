@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "release": "semantic-release",
-    "release-setup": "semantic-release-cli setup",
+    "release-setup": "semantic-release-cli setup"
   },
   "license": "MIT",
   "devDependencies": {
