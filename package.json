@@ -1,12 +1,11 @@
 {
   "name": "@talyguryn/sample-npm-package",
-  "version": "0.1.1",
+  "version": "0.0.0-development",
   "description": "Sample NPM package for test purposes",
   "main": "index.js",
   "scripts": {
     "release": "semantic-release",
     "release-setup": "semantic-release-cli setup",
-    "semantic-release": "semantic-release"
   },
   "license": "MIT",
   "devDependencies": {
