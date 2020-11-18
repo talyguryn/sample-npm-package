@@ -1,9 +1,10 @@
 {
   "branches": [
     "master",
+    "main",
     "next"
   ],
-  "repositoryUrl": "https://github.com/abdelrahmanahmed/semantic-release-example",
+  "repositoryUrl": "https://github.com/talyguryn/sample-npm-package",
   "debug": "true",
   "plugins": [
     "@semantic-release/commit-analyzer",
