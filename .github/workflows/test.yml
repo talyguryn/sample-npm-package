@@ -53,7 +53,7 @@ jobs:
           - https://media.codex.so
           - https://school181.ru
           - https://school332.ru
-          - https://asd.asda.school332.ru
+          - https://asdasda.school332.ru
     steps:
       - name: Check domain SSL and registry expire date
         id: check-domain
