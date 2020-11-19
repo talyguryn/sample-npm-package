@@ -1,59 +1,56 @@
 name: Check domains SSL and DNS
 
 on: push
-#on:
-#  schedule:
-#    - cron:  '0 8 * * *'
 
 jobs:
   hello:
-    runs-on: ubuntu-latest
-    name: Check domains
+    runs-on: ubuntu-20.04
+    name: Check
     strategy:
       matrix:
         domain:
-          # CodeX site
-          - https://codex.so
-          - https://ifmo.su
+#          # CodeX site
+#          - https://codex.so
+#          - https://ifmo.su
 
           # Editor.js
           - https://editorjs.io
 
-          # Private docs
-          - https://docs.codex.so
-
-          # CodeX Bot structure
-          - https://bot.codex.so
-          #   Github app
-          - https://github.bot.codex.so
-          - https://github.bot.ifmo.su
-          #   Notify app
-          - https://notify.bot.codex.so
-          - https://notify.bot.ifmo.su
-
-          # CodeX Tunnel
-          - https://tun.codex.so
-          - https://tun.ifmo.su
-
-          # Hawk
-          - https://hawk.so
-          #   Hawk 2 beta
-          - https://beta.hawk.so
-          - https://api.beta.hawk.so
-          - https://k1.hawk.so
-          #   Hawk 2 stage
-          - https://stage.hawk.so
-          - https://api.stage.hawk.so
-          - https://k1.stage.hawk.so
-
-          # Capella
-          - https://capella.pics
-
-          # CodeX Media sites
-          - https://media.codex.so
-          - https://school181.ru
-          - https://school332.ru
-          - https://asdasda.codex.so
+#          # Private docs
+#          - https://docs.codex.so
+#
+#          # CodeX Bot structure
+#          - https://bot.codex.so
+#          #   Github app
+#          - https://github.bot.codex.so
+#          - https://github.bot.ifmo.su
+#          #   Notify app
+#          - https://notify.bot.codex.so
+#          - https://notify.bot.ifmo.su
+#
+#          # CodeX Tunnel
+#          - https://tun.codex.so
+#          - https://tun.ifmo.su
+#
+#          # Hawk
+#          - https://hawk.so
+#          #   Hawk 2 beta
+#          - https://beta.hawk.so
+#          - https://api.beta.hawk.so
+#          - https://k1.hawk.so
+#          #   Hawk 2 stage
+#          - https://stage.hawk.so
+#          - https://api.stage.hawk.so
+#          - https://k1.stage.hawk.so
+#
+#          # Capella
+#          - https://capella.pics
+#
+#          # CodeX Media sites
+#          - https://media.codex.so
+#          - https://school181.ru
+#          - https://school332.ru
+#          - https://asdasda.codex.so
     steps:
       - name: Check domain SSL and registry expire date
         id: check-domain
