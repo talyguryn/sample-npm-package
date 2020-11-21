@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/talyguryn/sample-npm-package/compare/v0.1.2...v0.1.3) (2020-11-21)
+
+
+### Bug Fixes
+
+* remove string ([d10ff68](https://github.com/talyguryn/sample-npm-package/commit/d10ff6833fde9b1047c103fdc86b14973d4c62d7))
+
 ## [0.1.2](https://github.com/talyguryn/sample-npm-package/compare/v0.1.1...v0.1.2) (2020-11-21)
 
 
