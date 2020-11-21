@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'next'
+      - 'master'
 
 #  release:
 #    # This specifies that the build will be triggered when we publish a release
