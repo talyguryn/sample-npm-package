@@ -8,7 +8,7 @@ jobs:
     name: Check
     steps:
       - name: Make envfile
-        uses: codex-team/action-create-env@v1
+        uses: codex-team/action-create-env@v1.1
         with:
           envkey_VUE_APP_API_URL: 'privet'
           envkey_VUE_APP_AUTH_TOKEN: 'token'
