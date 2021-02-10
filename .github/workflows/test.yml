@@ -7,11 +7,17 @@ jobs:
     runs-on: ubuntu-20.04
     name: Check
     steps:
-      - name: Make envfile
-        uses: codex-team/action-create-env@v1.1
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
         with:
-          envkey_VUE_APP_API_URL: 'privet'
-          envkey_VUE_APP_AUTH_TOKEN: 'token'
+          ENV_TEST_API_KEY: ${{ secrets.TEST_API_KEY }}
+          ENV_ANOTHER_KEY: ${{ secrets.ANOTHER_KEY }}
+
+#      - name: Make envfile
+#        uses: codex-team/action-create-env@v1.1
+#        with:
+#          envkey_VUE_APP_API_URL: 'privet'
+#          envkey_VUE_APP_AUTH_TOKEN: 'token'
 
       - name: ls
         run: ls -la
