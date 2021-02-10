@@ -13,5 +13,8 @@ jobs:
           envkey_VUE_APP_API_URL: 'privet'
           envkey_VUE_APP_AUTH_TOKEN: 'token'
 
+      - name: ls
+        run: ls -la
+
       - name: show env
         run: cat .env
