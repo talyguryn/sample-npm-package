@@ -1,75 +1,15 @@
-name: Check domains SSL and DNS
-
 on: push
 
 jobs:
   hello:
     runs-on: ubuntu-20.04
     name: Check
-    strategy:
-      matrix:
-        domain:
-#          # CodeX site
-#          - https://codex.so
-#          - https://ifmo.su
-
-          # Editor.js
-          - https://editorjs.io
-
-#          # Private docs
-#          - https://docs.codex.so
-#
-#          # CodeX Bot structure
-#          - https://bot.codex.so
-#          #   Github app
-#          - https://github.bot.codex.so
-#          - https://github.bot.ifmo.su
-#          #   Notify app
-#          - https://notify.bot.codex.so
-#          - https://notify.bot.ifmo.su
-#
-#          # CodeX Tunnel
-#          - https://tun.codex.so
-#          - https://tun.ifmo.su
-#
-#          # Hawk
-#          - https://hawk.so
-#          #   Hawk 2 beta
-#          - https://beta.hawk.so
-#          - https://api.beta.hawk.so
-#          - https://k1.hawk.so
-#          #   Hawk 2 stage
-#          - https://stage.hawk.so
-#          - https://api.stage.hawk.so
-#          - https://k1.stage.hawk.so
-#
-#          # Capella
-#          - https://capella.pics
-#
-#          # CodeX Media sites
-#          - https://media.codex.so
-#          - https://school181.ru
-#          - https://school332.ru
-#          - https://asdasda.codex.so
     steps:
-      - name: Check domain SSL and registry expire date
-        id: check-domain
-        uses: codex-team/action-check-domain@v1
+      - name: Make envfile
+        uses: codex-team/action-create-env@v1
         with:
-          url: ${{ matrix.domain }}
+          envkey_VUE_APP_API_URL: 'privet'
+          envkey_VUE_APP_AUTH_TOKEN: 'token'
 
-      - name: Create an issue if paid till number is below limit
-        if: ${{ steps.check-domain.outputs.paid-till-days-left && steps.check-domain.outputs.paid-till-days-left < 10 }}
-        uses: rishabhgupta/git-action-issue@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: ⚠️ ${{ matrix.domain }} — registry expiries in ${{ steps.check-domain.outputs.paid-till-days-left }} days
-          body: 'Paid till: `${{ steps.check-domain.outputs.paid-till-date }}`'
-
-      - name: Create an issue if SSL lifespan days number is below limit
-        if: ${{ steps.check-domain.outputs.ssl-expire-days-left && steps.check-domain.outputs.ssl-expire-days-left < 10 }}
-        uses: rishabhgupta/git-action-issue@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: 🧨 ${{ matrix.domain }} — SSL cert expires in ${{ steps.check-domain.outputs.ssl-expire-days-left }} days
-          body: 'Valid till: `${{ steps.check-domain.outputs.ssl-expire-date }}`'
+      - name: show env
+        run: cat .env
