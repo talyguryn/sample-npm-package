@@ -37,9 +37,7 @@ jobs:
 
       - name: Publish release
         #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
-        run: |
-#          yarn release
-          yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+        run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
