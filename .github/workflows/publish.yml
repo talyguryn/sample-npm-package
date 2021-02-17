@@ -20,17 +20,13 @@ jobs:
           ref: ${{ github.event.release.target_commitish }}
 
       # Install Node.js
-      - name: Use Node.js 15
+      - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
-          node-version: 15
+          node-version: 12
           registry-url: https://registry.npmjs.org/
 
-      # set up git since we will later push to the repo
-#      - name: Prepare git settings
-#        run: |
-#          git config --global user.name "GitHub CD bot"
-#          git config --global user.email "github-cd-bot@example.com"
+      - run: yarn -v
 
       - name: Prepare package
         run: yarn install --frozen-lockfile
