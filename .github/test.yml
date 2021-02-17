@@ -10,8 +10,8 @@ jobs:
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
-          ENV_TEST_API_KEY: ${{ secrets.TEST_API_KEY }}
-          ENV_ANOTHER_KEY: ${{ secrets.ANOTHER_KEY }}
+          ENV_TEST_API_KEY: 'hellalloa'
+          ENV_ANOTHER_KEY: 'alloooo'
 
 #      - name: Make envfile
 #        uses: codex-team/action-create-env@v1.1
