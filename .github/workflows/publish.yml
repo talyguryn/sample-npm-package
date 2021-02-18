@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run: echo ${{ github.event.release.target_commitish }}
       - run: yarn
 #      - run: yarn build
       - run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '--tag=latest' }}
