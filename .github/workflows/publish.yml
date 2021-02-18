@@ -10,31 +10,42 @@ jobs:
     # Run on latest version of ubuntu
     runs-on: ubuntu-latest
     steps:
-      # Checkout to target branch
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          fetch-depth: 0
-          persist-credentials: false
-          # "ref" specifies the branch to check out.
-          # "github.event.release.target_commitish" is a global variable and specifies the branch the release targeted
-          ref: ${{ github.event.release.target_commitish }}
-
-      # Install Node.js
-      - name: Use Node.js 15
-        uses: actions/setup-node@v1
-        with:
-          node-version: 15
+          node-version: 12
           registry-url: https://registry.npmjs.org/
-
-      - name: Prepare package
-        run: yarn install --frozen-lockfile
-
-      - name: Publish release
-        #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
-        run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
-#        run: yarn publish --access=public
+      - run: yarn
+      - run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+#      # Checkout to target branch
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#          persist-credentials: false
+#          # "ref" specifies the branch to check out.
+#          # "github.event.release.target_commitish" is a global variable and specifies the branch the release targeted
+#          ref: ${{ github.event.release.target_commitish }}
+#
+#      # Install Node.js
+#      - name: Use Node.js 15
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: 15
+#          registry-url: https://registry.npmjs.org/
+#
+#      - name: Prepare package
+#        run: yarn install --frozen-lockfile
+#
+#      - name: Publish release
+#        #if: ${{ github.event.inputs.distTag == 'latest' || github.event.inputs.distTag == 'next' }}
+#        run: yarn publish --access=public ${{ github.event.release.prerelease && '--tag=next' || '' }}
+##        run: yarn publish --access=public
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 #      # set up git since we will later push to the repo
 #      - run: git config --global user.name "GitHub CD bot"
