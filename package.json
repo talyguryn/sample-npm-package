@@ -3,10 +3,7 @@
   "version": "0.1.5",
   "description": "Sample NPM package for test purposes",
   "main": "index.js",
-  "scripts": {
-    "release": "semantic-release",
-    "release-setup": "semantic-release-cli setup"
-  },
+  "scripts": {},
   "license": "MIT",
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
