@@ -1,0 +1,15 @@
+name: Bump version on merged request
+
+on:
+  pull_request:
+    branches:
+      - next
+    types: [closed]
+
+jobs:
+  commit:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: show env
+        run: cat .env

@@ -1,6 +1,6 @@
 {
   "name": "@talyguryn/sample-npm-package",
-  "version": "0.1.8",
+  "version": "0.1.11",
   "description": "Sample NPM package for test purposes",
   "main": "index.js",
   "scripts": {
