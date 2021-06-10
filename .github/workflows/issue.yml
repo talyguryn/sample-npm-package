@@ -9,11 +9,11 @@ jobs:
       # Checkout to target branch
       - uses: actions/checkout@v2
 
-      - run: echo ${{ github.event.issue.title }} >> README.md
+      - run: echo "${{ github.event.issue.title }}\n" >> README.md
 
       - uses: EndBug/add-and-commit@v7
         with:
           author_name: github-actions
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
-          message: 'Build frontend'
+          message: 'Update changelog'
 
