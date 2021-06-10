@@ -1,0 +1,19 @@
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout to target branch
+      - uses: actions/checkout@v2
+
+      - run: echo ${{ github.event.issue.title }} >> README.md
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          author_name: github-actions
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: 'Build frontend'
+

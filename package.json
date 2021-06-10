@@ -1,18 +1,15 @@
 {
   "name": "@talyguryn/sample-npm-package",
-  "version": "0.1.7",
+  "version": "0.1.11",
   "description": "Sample NPM package for test purposes",
   "main": "index.js",
-  "scripts": {},
-  "license": "MIT",
-  "devDependencies": {
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/release-notes-generator": "^9.0.1",
-    "semantic-release": "^17.2.3",
-    "semantic-release-cli": "^5.4.0"
+  "scripts": {
+    "build": "echo 'hello'",
+    "pull_tools": "git submodule update --init --recursive",
+    "checkout_tools": "git submodule foreach git pull origin master"
   },
+  "license": "MIT",
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/talyguryn/sample-npm-package.git"
