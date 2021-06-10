@@ -9,7 +9,7 @@ jobs:
       # Checkout to target branch
       - uses: actions/checkout@v2
 
-      - run: echo "${{ github.event.issue.title }}\n" >> README.md
+      - run: echo -e "${{ github.event.issue.title }}\n" >> README.md
 
       - uses: EndBug/add-and-commit@v7
         with:
